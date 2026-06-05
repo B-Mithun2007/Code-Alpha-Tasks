@@ -1,0 +1,489 @@
+```html id="advancedgallery02"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Image Gallery</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(to right,#141e30,#243b55);
+    min-height:100vh;
+    padding:30px;
+    color:white;
+}
+
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:42px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:35px;
+    color:#ddd;
+    font-size:18px;
+}
+
+
+
+.filter-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:35px;
+}
+
+.filter-buttons button{
+    padding:12px 22px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#243b55;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.4s;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+
+.filter-buttons button:hover{
+    transform:translateY(-3px);
+    background:#ffcc70;
+}
+
+
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+
+
+.image{
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+    cursor:pointer;
+    box-shadow:0 10px 20px rgba(0,0,0,0.3);
+    transition:0.4s;
+}
+
+.image:hover{
+    transform:translateY(-8px);
+}
+
+.image img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transition:0.6s;
+}
+
+.image:hover img{
+    transform:scale(1.12);
+}
+
+
+
+.overlay{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    padding:20px;
+    background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);
+    color:white;
+}
+
+.overlay h3{
+    margin-bottom:5px;
+}
+
+.overlay p{
+    font-size:14px;
+    color:#ddd;
+}
+
+
+.lightbox{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:1000;
+    padding:20px;
+}
+
+.lightbox img{
+    width:85%;
+    max-width:900px;
+    max-height:80vh;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(255,255,255,0.2);
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:35px;
+    font-size:45px;
+    color:white;
+    cursor:pointer;
+}
+
+.nav-buttons{
+    margin-top:25px;
+}
+
+.nav-buttons button{
+    padding:12px 22px;
+    margin:0 10px;
+    border:none;
+    border-radius:10px;
+    background:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.nav-buttons button:hover{
+    background:#ffcc70;
+}
+
+
+
+@media(max-width:768px){
+
+    h1{
+        font-size:32px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .lightbox img{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<h1><i class="fa-solid fa-image"></i> Advanced Image Gallery</h1>
+
+<p class="subtitle">
+Beautiful responsive gallery with filters, animations, lightbox and navigation
+</p>
+
+<div class="filter-buttons">
+
+    <button onclick="filterImages('all')">All</button>
+
+    <button onclick="filterImages('nature')">Nature</button>
+
+    <button onclick="filterImages('city')">City</button>
+
+    <button onclick="filterImages('animals')">Animals</button>
+
+    <button onclick="filterImages('travel')">Travel</button>
+
+    <button onclick="filterImages('food')">Food</button>
+
+</div>
+
+<div class="gallery">
+
+
+    <div class="image nature">
+        <img src="https://picsum.photos/id/1015/700/500">
+        <div class="overlay">
+            <h3>Mountain Lake</h3>
+            <p>Beautiful nature scenery</p>
+        </div>
+    </div>
+
+    <div class="image nature">
+        <img src="https://picsum.photos/id/1016/700/500">
+        <div class="overlay">
+            <h3>Forest View</h3>
+            <p>Green peaceful forest</p>
+        </div>
+    </div>
+
+    <div class="image nature">
+        <img src="https://picsum.photos/id/1043/700/500">
+        <div class="overlay">
+            <h3>Waterfall</h3>
+            <p>Fresh natural waterfall</p>
+        </div>
+    </div>
+
+
+    <div class="image city">
+        <img src="https://picsum.photos/id/1011/700/500">
+        <div class="overlay">
+            <h3>Modern City</h3>
+            <p>Urban architecture</p>
+        </div>
+    </div>
+
+    <div class="image city">
+        <img src="https://picsum.photos/id/1031/700/500">
+        <div class="overlay">
+            <h3>Night Lights</h3>
+            <p>City at night</p>
+        </div>
+    </div>
+
+    <div class="image city">
+        <img src="https://picsum.photos/id/1040/700/500">
+        <div class="overlay">
+            <h3>Street View</h3>
+            <p>Beautiful streets</p>
+        </div>
+    </div>
+
+
+    <div class="image animals">
+        <img src="https://picsum.photos/id/1025/700/500">
+        <div class="overlay">
+            <h3>Golden Dog</h3>
+            <p>Friendly pet dog</p>
+        </div>
+    </div>
+
+    <div class="image animals">
+        <img src="https://picsum.photos/id/237/700/500">
+        <div class="overlay">
+            <h3>Black Puppy</h3>
+            <p>Cute puppy portrait</p>
+        </div>
+    </div>
+
+    <div class="image animals">
+        <img src="https://picsum.photos/id/1074/700/500">
+        <div class="overlay">
+            <h3>Wild Deer</h3>
+            <p>Nature wildlife</p>
+        </div>
+    </div>
+
+    <div class="image travel">
+        <img src="https://picsum.photos/id/1068/700/500">
+        <div class="overlay">
+            <h3>Beach Travel</h3>
+            <p>Relaxing beach trip</p>
+        </div>
+    </div>
+
+    <div class="image travel">
+        <img src="https://picsum.photos/id/1056/700/500">
+        <div class="overlay">
+            <h3>Adventure Road</h3>
+            <p>Travel journey</p>
+        </div>
+    </div>
+
+    <div class="image travel">
+        <img src="https://picsum.photos/id/1036/700/500">
+        <div class="overlay">
+            <h3>Island View</h3>
+            <p>Vacation destination</p>
+        </div>
+    </div>
+
+    <div class="image food">
+        <img src="https://picsum.photos/id/1080/700/500">
+        <div class="overlay">
+            <h3>Healthy Breakfast</h3>
+            <p>Fresh delicious meal</p>
+        </div>
+    </div>
+
+    <div class="image food">
+        <img src="https://picsum.photos/id/292/700/500">
+        <div class="overlay">
+            <h3>Dessert</h3>
+            <p>Sweet tasty dessert</p>
+        </div>
+    </div>
+
+    <div class="image food">
+        <img src="https://picsum.photos/id/431/700/500">
+        <div class="overlay">
+            <h3>Pizza Time</h3>
+            <p>Hot cheesy pizza</p>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="lightbox" id="lightbox">
+
+    <span class="close">&times;</span>
+
+    <img id="lightbox-img">
+
+    <div class="nav-buttons">
+
+        <button id="prev">
+            <i class="fa-solid fa-arrow-left"></i> Previous
+        </button>
+
+        <button id="next">
+            Next <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+
+const images = document.querySelectorAll(".gallery img");
+
+const lightbox = document.getElementById("lightbox");
+
+const lightboxImg = document.getElementById("lightbox-img");
+
+const closeBtn = document.querySelector(".close");
+
+const nextBtn = document.getElementById("next");
+
+const prevBtn = document.getElementById("prev");
+
+let currentIndex = 0;
+
+
+images.forEach((img,index)=>{
+
+    img.addEventListener("click",()=>{
+
+        currentIndex = index;
+
+        showImage();
+
+        lightbox.style.display = "flex";
+
+    });
+
+});
+
+
+function showImage(){
+
+    lightboxImg.src = images[currentIndex].src;
+
+}
+
+
+nextBtn.addEventListener("click",()=>{
+
+    currentIndex++;
+
+    if(currentIndex >= images.length){
+
+        currentIndex = 0;
+
+    }
+
+    showImage();
+
+});
+
+
+prevBtn.addEventListener("click",()=>{
+
+    currentIndex--;
+
+    if(currentIndex < 0){
+
+        currentIndex = images.length - 1;
+
+    }
+
+    showImage();
+
+});
+
+
+closeBtn.addEventListener("click",()=>{
+
+    lightbox.style.display = "none";
+
+});
+
+lightbox.addEventListener("click",(e)=>{
+
+    if(e.target === lightbox){
+
+        lightbox.style.display = "none";
+
+    }
+
+});
+
+
+function filterImages(category){
+
+    const cards = document.querySelectorAll(".image");
+
+    cards.forEach(card=>{
+
+        if(category === "all"){
+
+            card.style.display = "block";
+
+        }
+
+        else if(card.classList.contains(category)){
+
+            card.style.display = "block";
+
+        }
+
+        else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
+```
